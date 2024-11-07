@@ -1,7 +1,6 @@
 package com.eastnets.supervisorservice.controller;
 
 import com.eastnets.supervisorservice.model.SupervisorDTO;
-import com.eastnets.supervisorservice.model.Supervisor;
 import com.eastnets.supervisorservice.service.SupervisorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +18,12 @@ public class SupervisorController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Supervisor> login(@RequestBody SupervisorDTO supervisorDTO) {
+    public ResponseEntity<String> login(@RequestBody SupervisorDTO supervisorDTO) {
         return supervisorService.login(supervisorDTO.getUsername(), supervisorDTO.getPassword());
+    }
+
+    @GetMapping("/protected-endpoint")
+    public ResponseEntity<String> getProtectedData() {
+        return ResponseEntity.ok("This is protected data");
     }
 }
